@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>Login</h1>
+
+  <input type="text" id="username" placeholder="Username"><br>
+
+  <div style="position: relative;">
+    <input type="password" id="password" placeholder="Password">
+  </div>
+
+  <button onclick="login()">Login</button>
+
+  <p id="message"></p>
+
+  <p style="margin-top:10px;">
+    Don't have an account? <a href="signup.html">Create Account</a>
+  </p>
+
+  <p>
+    <a href="#" onclick="forgetPassword()">Forgot Password?</a>
+  </p>
+</div>
+
+<script>
+function login() {
+  var user = document.getElementById("username").value;
+  var pass = document.getElementById("password").value;
+
+  var savedUser = localStorage.getItem("username");
+  var savedPass = localStorage.getItem("password");
+
+  if(!savedUser || !savedPass){
+    document.getElementById("message").innerText = "❌ No account found! Please create an account first.";
+    return;
+  }
+
+  if(user === savedUser && pass === savedPass){
+    // الدخول على الـ Dashboard
+    window.location.href = "dashboard.html";
+  } else {
+    document.getElementById("message").innerText = "❌ Wrong username or password";
+  }
+}
+
+// Show/Hide Password
+document.getElementById("showPass").onclick = function () {
+  var passField = document.getElementById("password");
+  if(passField.type === "password"){
+    passField.type = "text";
+    this.innerText = "Hide";
+  } else {
+    passField.type = "password";
+    this.innerText = "Show";
+  }
+}
+
+// Forgot Password
+function forgetPassword() {
+  var user = localStorage.getItem("username");
+  if(!user){
+    alert("No account found! Create one first.");
+  } else {
+    alert("Your username is: " + user + "\nPassword: " + localStorage.getItem("password"));
+  }
+}
+</script>
+
+</body>
+</html>
