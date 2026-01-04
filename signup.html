@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Account</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>Create Your Account</h1>
+
+  <input type="text" id="newUsername" placeholder="Username"><br>
+
+  <div style="position: relative;">
+    <input type="password" id="newPassword" placeholder="Password">
+  
+  </div>
+
+  <button onclick="createAccount()">Create Account</button>
+
+  <p id="message"></p>
+
+  <p style="margin-top:10px;">
+    Already have an account? <a href="youssef.html">Login here</a>
+  </p>
+</div>
+
+<script>
+function createAccount() {
+  var user = document.getElementById("newUsername").value;
+  var pass = document.getElementById("newPassword").value;
+
+  if(user === "" || pass === "") {
+    document.getElementById("message").innerText = "❌ Please fill all fields";
+    return;
+  }
+
+  // حفظ البيانات
+  localStorage.setItem("username", user);
+  localStorage.setItem("password", pass);
+
+  // تحويل مباشر للـ Dashboard
+  window.location.href = "dashboard.html";
+}
+
+// Show/Hide Password
+document.getElementById("showPass").onclick = function () {
+  var passField = document.getElementById("newPassword");
+  if(passField.type === "password"){
+    passField.type = "text";
+    this.innerText = "Hide";
+  } else {
+    passField.type = "password";
+    this.innerText = "Show";
+  }
+}
+
+// Forget Password
+function forgetPassword() {
+  var user = localStorage.getItem("username");
+  if(!user) {
+    alert("No account found! Create one first.");
+  } else {
+    alert("Your username is: " + user + "\nPassword: " + localStorage.getItem("password"));
+  }
+}
+</script>
+
+</body>
+</html>

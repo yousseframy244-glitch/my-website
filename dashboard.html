@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ekteb yala</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="center">
+  <span id="welcomeUser">Welcome, Youssef</span>
+
+  <div class="top-right-buttons">
+    <div class="dropdown">
+      <button id="settingsBtn">⚙️</button>
+      <div class="dropdown-content" id="dropdownMenu">
+        <a href="#">Profile</a>
+        <a href="#" id="logoutLink">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- محتوى الصفحة -->
+<div class="dashboard">
+  <p>You are logged in successfully 🎉</p>
+
+  <!-- هنا نحط الكروت -->
+  <div class="dash-boxes">
+    <div class="box">
+      <h3>My Game 🚗</h3>
+      <p>Open your game</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // عرض اسم المستخدم
+  var user = localStorage.getItem("username");
+  if(user) {
+    document.getElementById("welcomeUser").innerText = "Welcome, " + user;
+  }
+
+  // Toggle Dropdown
+  document.getElementById("settingsBtn").onclick = function() {
+    var menu = document.getElementById("dropdownMenu");
+    if(menu.style.display === "block") {
+      menu.style.display = "none";
+    } else {
+      menu.style.display = "block";
+    }
+  }
+
+  // Logout من Dropdown
+  document.getElementById("logoutLink").onclick = function() {
+    localStorage.removeItem("username");
+    localStorage.removeItem("password");
+    window.location.href = "youssef.html"; // الصفحة الرئيسية
+  }
+</script>
+
+</body>
+</html>
