@@ -1,72 +1,129 @@
-body {
+* {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(135deg, #4e54c8, #8f94fb);
-  height: 100vh;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0f0f0f;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 50px;
+}
+
+.logo {
+  letter-spacing: 5px;
+}
+
+.nav-links a {
+  color: white;
+  margin-left: 30px;
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero h2 {
+  font-size: 50px;
+  letter-spacing: 8px;
+}
+
+.hero p {
+  opacity: 0.6;
+  margin-top: 15px;
+}
+
+/* Products */
+.products {
   display: flex;
   justify-content: center;
-  align-items: center;
+  gap: 40px;
+  padding: 60px;
 }
 
-.container {
-  background: white;
-  padding: 30px 40px;
-  width: 350px;
-  border-radius: 15px;
+.product-card {
+  width: 250px;
   text-align: center;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
-.container h1 {
-  margin-bottom: 25px;
-  color: #4e54c8;
-}
-
-input {
+.product-card img {
   width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  filter: grayscale(100%);
+}
+
+.product-card h3 {
+  margin-top: 15px;
+}
+
+.product-card span {
+  opacity: 0.7;
+}
+img {
+  width: 200px;
+  border: 2px solid red;
+}
+.product-card button {
+  margin-top: 10px;
+  padding: 8px;
+  width: 100%;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.product-card button:hover {
+  background: #333;
+}
+
+/* Cart */
+.cart {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  height: 100%;
+  background: #111;
+  color: white;
+  padding: 20px;
+  transition: 0.4s;
+  z-index: 1000;
+}
+
+.cart h2 {
+  margin-bottom: 20px;
+}
+
+.cart-item {
+  margin-bottom: 10px;
   font-size: 14px;
 }
 
-button {
-  width: 100%;
-  padding: 12px;
+.cart-item button {
+  background: red;
   border: none;
-  border-radius: 8px;
-  margin-top: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  background: #4e54c8;
   color: white;
-  transition: 0.3s;
-}
-
-button:hover {
-  background: #3b3fc1;
-}
-
-#showPass {
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  padding: 5px 8px;
-  font-size: 12px;
+  padding: 3px 6px;
   cursor: pointer;
+  margin-left: 5px;
 }
 
-#message {
-  margin-top: 15px;
-  font-weight: bold;
-}
-
-a {
-  color: #4e54c8;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
+.show-cart {
+  right: 0;
 }
