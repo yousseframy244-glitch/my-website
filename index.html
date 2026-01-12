@@ -1,74 +1,113 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login</title>
+  <title>Omar's Brand</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-  <h1>Login</h1>
+<!-- Navbar -->
+<div class="navbar">
+  <h1 class="logo">OMAR'S BRAND</h1>
 
-  <input type="text" id="username" placeholder="Username"><br>
-
-  <div style="position: relative;">
-    <input type="password" id="password" placeholder="Password">
+  <div class="nav-links">
+    <a href="#">Home</a>
+    <a href="#">Shop</a>
+    <a href="#" onclick="toggleCart()">🛒 <span id="cartCount">0</span></a>
   </div>
-
-  <button onclick="login()">Login</button>
-
-  <p id="message"></p>
-
-  <p style="margin-top:10px;">
-    Don't have an account? <a href="signup.html">Create Account</a>
-  </p>
-
-  <p>
-    <a href="#" onclick="forgetPassword()">Forgot Password?</a>
-  </p>
 </div>
 
+<!-- Hero -->
+<div class="hero">
+  <h2>STREET WEAR</h2>
+  <p>Premium Quality • Limited Edition</p>
+</div>
+
+<!-- Products -->
+<div class="products">
+
+  <!-- Product 1 -->
+  <div class="product-card">
+    <img src="car.png" alt="Product Image">
+    <h3>omar</h3>
+    <span>850 EGP</span>
+   <button onclick="addToCart('omar', 850)">
+    Add to Cart
+  </button>
+</div>
+
+
+  <!-- Product 2 -->
+  <div class="product-card">
+    <img src="car.png" alt="Product Image">
+    <h3>Youssef</h3>
+    <span>450 EGP</span>
+   <button onclick="addToCart('Youssef', 450)">
+    Add to Cart
+  </button>
+</div>
+
+</div>
+
+
+<div class="cart" id="cart">
+
+  <div class="cart-header left">
+    <h2>Your Cart</h2>
+    <span class="close-cart" onclick="toggleCart()">✖</span>
+  </div>
+
+  <div id="cartItems"></div>
+  <p id="totalPrice">Total: 0 EGP</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
 <script>
-function login() {
-  var user = document.getElementById("username").value;
-  var pass = document.getElementById("password").value;
+let cart = [];
 
-  var savedUser = localStorage.getItem("username");
-  var savedPass = localStorage.getItem("password");
-
-  if(!savedUser || !savedPass){
-    document.getElementById("message").innerText = "❌ No account found! Please create an account first.";
-    return;
-  }
-
-  if(user === savedUser && pass === savedPass){
-    // الدخول على الـ Dashboard
-    window.location.href = "dashboard.html";
-  } else {
-    document.getElementById("message").innerText = "❌ Wrong username or password";
-  }
+function addToCart(name, price) {
+  cart.push({name, price});
+  updateCart();
 }
 
-// Show/Hide Password
-document.getElementById("showPass").onclick = function () {
-  var passField = document.getElementById("password");
-  if(passField.type === "password"){
-    passField.type = "text";
-    this.innerText = "Hide";
-  } else {
-    passField.type = "password";
-    this.innerText = "Show";
-  }
+function updateCart() {
+  let cartItems = document.getElementById("cartItems");
+  let total = 0;
+  cartItems.innerHTML = "";
+
+  cart.forEach((item, index) => {
+    total += item.price;
+    cartItems.innerHTML += `
+      <div class="cart-item">
+        ${item.name} - ${item.price} EGP
+        <button onclick="removeItem(${index})">x</button>
+      </div>
+    `;
+  });
+
+  document.getElementById("totalPrice").innerText =
+    "Total: " + total + " EGP";
+
+  document.getElementById("cartCount").innerText = cart.length;
 }
 
-// Forgot Password
-function forgetPassword() {
-  var user = localStorage.getItem("username");
-  if(!user){
-    alert("No account found! Create one first.");
-  } else {
-    alert("Your username is: " + user + "\nPassword: " + localStorage.getItem("password"));
-  }
+function removeItem(index) {
+  cart.splice(index, 1);
+  updateCart();
+}
+
+function toggleCart() {
+  document.getElementById("cart").classList.toggle("show-cart");
 }
 </script>
 
